@@ -5,13 +5,12 @@ gridSizeBtn.addEventListener("click", setGridSize);
 
 
 function createGrid(size) {
+    grid.innerHTML = "";
     for(let i = 0; i < (size * size); i++) {
         const cell = document.createElement("div");
-        cell.style.width = (parseInt(grid.style.width)) / size; 
-        cell.style.height = (parseInt(grid.style.height)) / size;
-        cell.addEventListener("mouseover", (event) => {
-            event.target.style.backgroundColor = getRandomColor();
-        }); // can I write this function outside of the for loop or does the Event object not exist otherwise?
+        cell.style.width = "100%";
+        cell.style.height = "100%";
+        cell.addEventListener("mouseover", setRandomColor);
         cell.classList.add("cell");
         grid.appendChild(cell);
     }
@@ -28,5 +27,9 @@ function getRandomColor() {
     let x = Math.floor(Math.random() * 256);
     let y = Math.floor(Math.random() * 256);
     let z = Math.floor(Math.random() * 256);
-    return color = "rgb(" + x + "," + y + "," + z + ")";
+    return "rgb(" + x + "," + y + "," + z + ")";
+}
+
+function setRandomColor(event) {
+    event.target.style.backgroundColor = getRandomColor();   
 }
